@@ -6,19 +6,9 @@
 #	Handles and transfers user input
 #
 
+. lib/00prompt.sh
 
-# Utility
-SET_CLR_NORMAL=$(tput sgr0);
-SET_CLR_YELLOW=$(tput setaf 3);
 
-echo_info()
-{
-	echo "$SET_CLR_YELLOW""$*""$SET_CLR_NORMAL";
-}
-echo_break()
-{
-	echo '';
-}
 echo_ext()
 {
 	echo_info "Extension name: $ext_name";
@@ -36,10 +26,11 @@ echo_fetch_func()
 	echo_info "Template fetch functions: $req_fetch_func";
 }
 
+
 echo_break;
 
 
-# Input: Extension name
+#	Input: Extension name
 while true; do
 	read -p $'Extension name [<name>]\n > ' ext_name;
 	if [[ "${ext_name}" =~ [a-zA-Z_]+ ]]; then
@@ -49,7 +40,7 @@ done;
 echo_break;
 
 
-# Input: Module name(s)
+#	Input: Module name(s)
 prompt_modules=$'Add module [<name>/n]\n > ';
 declare -a module_names;
 while true; do
@@ -71,7 +62,7 @@ done;
 echo_break;
 
 
-# Input: Autoloading
+#	Input: Autoloading
 while true; do
 	read -p $'PHP autoloading? [y/n]\n > ' input;
 	case $input in
@@ -88,7 +79,7 @@ done;
 echo_break;
 
 
-# Input: Fetch functions
+#	Input: Fetch functions
 while true; do
 	read -p $'Template fetch functions? [y/n]\n > ' input;
 	case $input in
@@ -113,7 +104,7 @@ echo_break;
 # Input: Translation
 
 
-# Input: Confirm configuration
+#	Input: Confirm configuration
 echo_info "Configuration summary:";
 echo_ext;
 echo_modules;
