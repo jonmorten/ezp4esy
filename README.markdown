@@ -15,7 +15,7 @@ Automate the setting up of extensions while imposing supposed best practices.
 	* Attempt to move configuration to a class - at least the view URLs
 	* `$FunctionList`
 	* `'params' => array( 'paramKey' => 'paramKey' ),`
-* Template operators through as class, as done by eZ
+* Template operators: Actually test if the class version works on an eZ clone
 * Silly two character prefix of navigation part
 * _\_view.php_
 	* Attempt to move path configuration to a class
