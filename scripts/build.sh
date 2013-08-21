@@ -3,10 +3,13 @@
 
 #
 #	Bootstrap the build
-#	Handles and transfers user input
+#	Handle and transfer user input
 #
 
-. lib/00prompt.sh
+
+for script in lib/*; do
+	. $script;
+done;
 
 
 echo_ext()
@@ -63,36 +66,14 @@ echo_break;
 
 
 #	Input: Autoloading
-while true; do
-	read -p $'PHP autoloading? [y/n]\n > ' input;
-	case $input in
-		[Yy]*)
-			req_autoloading=true;
-			break;
-			;;
-		[Nn]*)
-			req_autoloading=false;
-			break;
-			;;
-	esac;
-done;
+declare req_autoloading;
+prompt_boolean "PHP autoloading?" "req_autoloading";
 echo_break;
 
 
 #	Input: Fetch functions
-while true; do
-	read -p $'Template fetch functions? [y/n]\n > ' input;
-	case $input in
-		[Yy]*)
-			req_fetch_func=true;
-			break;
-			;;
-		[Nn]*)
-			req_fetch_func=false;
-			break;
-			;;
-	esac;
-done;
+declare req_fetch_func;
+prompt_boolean "Template fetch functions?" "req_fetch_func";
 echo_break;
 
 
@@ -126,5 +107,7 @@ done;
 echo_break;
 
 
+# @todo
+# Unique module names
 # Copy template into export folder, depending on extent of build
 # Replace placeholders
