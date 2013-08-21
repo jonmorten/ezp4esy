@@ -73,7 +73,7 @@ echo_break;
 
 # Input: Autoloading
 while true; do
-	read -p $'Do you need autoloading? [y/n]\n > ' input;
+	read -p $'PHP autoloading? [y/n]\n > ' input;
 	case $input in
 		[Yy]*)
 			req_autoloading=true;
@@ -90,7 +90,7 @@ echo_break;
 
 # Input: Fetch functions
 while true; do
-	read -p $'Do you need template fetch functions? [y/n]\n > ' input;
+	read -p $'Template fetch functions? [y/n]\n > ' input;
 	case $input in
 		[Yy]*)
 			req_fetch_func=true;
@@ -114,7 +114,7 @@ echo_break;
 
 
 # Input: Confirm configuration
-echo_info "Configuration:";
+echo_info "Configuration summary:";
 echo_ext;
 echo_modules;
 echo_autoloading;
