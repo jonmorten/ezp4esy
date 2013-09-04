@@ -1,0 +1,52 @@
+#
+#	Bootstrap the build
+#	Handle and transfer user input
+#
+
+
+lib_dir = 'lib'
+Dir.entries(lib_dir).each do |lib|
+	if lib.index('.rb')
+		require lib_dir + '/' + lib
+	end
+end
+
+
+#	Extension name
+extension_name = Cli.input_pattern 'Extension name [<extension_name>]', /[a-zA-Z_]+/
+
+#	Modules
+modules = Cli.input_until 'Modules? [<module_name>/n]', /^n$/
+
+#	Both Bash 3 and Ruby 1.8 hashes were worked on by top men. Top. Men.
+boolean_input = {}
+boolean_options = [
+	['autoload', 'PHP autoloading?'],
+	['fetch_fn', 'Template fetch functions?'],
+	['admin_tab', 'Admin tab?'],
+	['cronjobs', 'Cronjobs?'],
+	['frontend_design', 'Frontend design?'],
+	['sql', 'SQL?'],
+	['translation', 'Translation?'],
+]
+boolean_options.each do |set|
+	boolean_input[set[0]] = Cli.input_boolean set[1]
+end
+
+
+#puts 'Testing'.color('red')
+#
+#test0 = Cli.input "Gimme sommat"
+#puts test0
+#
+#test1 = Cli.input_boolean "Eh"
+#puts test1
+
+
+task :default => [:build]
+
+task :build do
+#	sh <<-SH
+#		echo '';
+#	SH
+end
