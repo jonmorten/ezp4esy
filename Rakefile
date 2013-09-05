@@ -7,7 +7,7 @@
 lib_dir = 'lib'
 Dir.entries(lib_dir).each do |lib|
 	if lib.index('.rb')
-		require lib_dir + '/' + lib
+		require [lib_dir, lib] * '/'
 	end
 end
 
