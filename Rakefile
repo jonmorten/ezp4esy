@@ -18,6 +18,7 @@ extension_name = Cli.input_pattern 'Extension name [<extension_name>]', /[a-zA-Z
 #	Modules
 modules = Cli.input_until 'Modules? [<module_name>/n]', /^n$/
 
+#	Boolean options
 #	Both Bash 3 and Ruby 1.8 hashes were worked on by top men. Top. Men.
 boolean_input = {}
 boolean_options = [
@@ -32,15 +33,6 @@ boolean_options = [
 boolean_options.each do |set|
 	boolean_input[set[0]] = Cli.input_boolean set[1]
 end
-
-
-#puts 'Testing'.color('red')
-#
-#test0 = Cli.input "Gimme sommat"
-#puts test0
-#
-#test1 = Cli.input_boolean "Eh"
-#puts test1
 
 
 task :default => [:build]
