@@ -67,6 +67,7 @@ class Cli
 			else
 				values << value
 			end
+			values.uniq!
 			puts values.inspect.color('darkyellow')
 		end
 		return values
