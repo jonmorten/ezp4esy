@@ -11,6 +11,10 @@ class Build
 		shell_command << <<-SH
 			mkdir -p #{extension_dir}
 			cp -r template/#{extension_name_placeholder}/* #{extension_dir}/
+			pushd #{extension_dir}
+			find * -type f \\! -name '.*' \
+			| xargs -I '{}' sed -i '' -e 's/#{extension_name_placeholder}/#{extension_name}/g' '{}'
+			popd
 		SH
 
 		Rake::sh shell_command.gsub!(/\t/, '')
