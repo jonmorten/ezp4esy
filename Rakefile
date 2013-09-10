@@ -12,6 +12,8 @@ Dir.entries(lib_dir).each do |lib|
 end
 
 
+verbose false
+
 task :default => [:clean, :build]
 
 task :clean do
@@ -26,7 +28,8 @@ task :build do
 	module_names = Cli::input_until 'Modules? [<module_name>/n]', /^n$/
 
 	#	Boolean options
-	#	Both Bash 3 and Ruby 1.8 hashes were worked on by top men. Top. Men.
+	#	Use crack hash to keep sort order. Ruby 1.8 hashes won't keep the order
+	# 	in which they were created, but arrays will.
 	boolean_input = {}
 	boolean_options = [
 		['autoload', 'PHP autoloading?'],
@@ -40,4 +43,7 @@ task :build do
 	boolean_options.each do |set|
 		boolean_input[set[0]] = Cli::input_boolean set[1]
 	end
+
+	#	Copy template and replace placeholders
+	Build::make(extension_name, module_names, boolean_input)
 end
