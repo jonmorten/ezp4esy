@@ -1,34 +1,31 @@
 class Color
 	@@colors = {
-		'default' => "\e[0m",
-		'cyan' => "\e[1;36;40m",
-		'darkcyan' => "\e[0;36;40m",
-		'darkgreen' => "\e[0;32;40m",
-		'darkred' => "\e[0;31;40m",
-		'darkyellow' => "\e[0;33;40m",
-		'green' => "\e[1;32;40m",
-		'red' => "\e[1;31;40m",
-		'yellow' => "\e[1;33;40m",
+		:default => "\e[0m",
+		:cyan => "\e[1;36;40m",
+		:darkcyan => "\e[0;36;40m",
+		:darkgreen => "\e[0;32;40m",
+		:darkred => "\e[0;31;40m",
+		:darkyellow => "\e[0;33;40m",
+		:green => "\e[1;32;40m",
+		:red => "\e[1;31;40m",
+		:yellow => "\e[1;33;40m",
 	}
 
-	def self.set(color)
-		if @@colors.key?(color)
-			return @@colors[color]
-		else
-			return ''
-		end
+	def self.set(key)
+		raise ArgumentError, ":#{color} is not set" unless @@colors.key?(key)
+		return @@colors[key]
 	end
 end
 
 class String
-	def color(color)
-		return Color.set(color) + self + Color.set('default')
+	def color(key)
+		return Color.set(key) + self + Color.set(:default)
 	end
 end
 
 class Cli
 	def self.input(message)
-		print (message + "\n> ").color('darkyellow')
+		print (message + "\n> ").color(:darkyellow)
 		return gets.chomp
 	end
 
@@ -68,7 +65,7 @@ class Cli
 				values << value
 			end
 			values.uniq!
-			puts values.inspect.color('darkyellow')
+			puts values.inspect.color(:darkyellow)
 		end
 		return values
 	end
