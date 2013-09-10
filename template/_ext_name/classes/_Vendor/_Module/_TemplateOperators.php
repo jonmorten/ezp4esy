@@ -1,6 +1,6 @@
 <?php
 
-namespace _Vendor\_Module;
+namespace classes\_Vendor\_Module;
 
 /**
  *  All methods save `getOperatorNames` are used by eZ.

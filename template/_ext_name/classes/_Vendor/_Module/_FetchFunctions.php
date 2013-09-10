@@ -1,6 +1,6 @@
 <?php
 
-namespace _Vendor\_Module;
+namespace classes\_Vendor\_Module;
 
 /**
  *  Note that the array returned and its structure

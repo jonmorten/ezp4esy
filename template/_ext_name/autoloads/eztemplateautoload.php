@@ -5,7 +5,7 @@ require 'groupedfunctions0.php';
 $eZTemplateOperatorArray[] = array(
     'script' => 'extension/_ext_name/classes/_Vendor/_Module/_TemplateOperators.php',
     'class' => '_TemplateOperators',
-    'operator_names' => _Vendor\_Module\_TemplateOperators::getOperatorNames(),
+    'operator_names' => classes\_Vendor\_Module\_TemplateOperators::getOperatorNames(),
 );
 
 

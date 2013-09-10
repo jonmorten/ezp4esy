@@ -1,6 +1,6 @@
 <?php
 
-namespace _Vendor\_Module;
+namespace classes\_Vendor\_Module;
 
 /**
  *  @author     your name   <user@host.tld>
