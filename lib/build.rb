@@ -8,8 +8,9 @@ class Build
 		extension_dir = [self.get_output_dir_path(), extension_name] * '/'
 		extension_name_placeholder = self.get_placeholder(:extension)
 
-		shell_command = ''
-		shell_command << <<-SH
+		shell = Shell.new()
+
+		shell.command <<-SH
 			mkdir -p #{extension_dir}
 			cp -r template/#{extension_name_placeholder}/* #{extension_dir}/
 			pushd #{extension_dir}
@@ -18,7 +19,7 @@ class Build
 			popd
 		SH
 
-		Rake::sh shell_command.gsub!(/\t/, '')
+		shell.run
 	end
 
 
@@ -36,5 +37,24 @@ class Build
 	def self.get_placeholder(key)
 		raise ArgumentError, ":#{key} is not set" unless @@placeholders.key?(key)
 		return @@placeholders[key]
+	end
+end
+
+
+class Shell
+	def initialize()
+		@command = ''
+	end
+
+	def command(string)
+		@command << string
+	end
+
+	def dump
+		print @command
+	end
+
+	def run
+		Rake::sh @command.gsub!(/\t/, '')
 	end
 end
