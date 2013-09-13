@@ -12,6 +12,8 @@ class Build
 		template_dir = [self.get_template_dir_container(), extension_name_placeholder] * '/'
 		relative_dirs = {
 			:classes => 'classes/_Vendor/_Module',
+			:admin_templates => 'design/admin2/templates/_module_name',
+			:frontend_templates => 'design/standard/templates/_module_name',
 		}
 
 		shell = Shell.new()
@@ -46,6 +48,30 @@ class Build
 				mkdir -p #{extension_dir}/settings
 				cat #{template_dir}/settings/site.ini.append.tpl_operators.php >> #{extension_dir}/settings/site.ini.append.php
 			SH
+		end
+
+		# Designs
+		if boolean_input['admin_design'] || boolean_input['frontend_design']
+			shell.command <<-SH
+				mkdir -p #{extension_dir}/design #{extension_dir}/settings
+				cp #{template_dir}/settings/design.ini.append.php #{extension_dir}/settings/
+			SH
+
+			# Admin
+			if boolean_input['admin_design']
+				shell.command <<-SH
+					mkdir -p #{extension_dir}/#{relative_dirs[:admin_templates]}
+					cp -r #{template_dir}/#{relative_dirs[:admin_templates]}/* #{extension_dir}/#{relative_dirs[:admin_templates]}/
+				SH
+			end
+
+			# Frontend
+			if boolean_input['frontend_design']
+				shell.command <<-SH
+					mkdir -p #{extension_dir}/#{relative_dirs[:frontend_templates]}
+					cp -r #{template_dir}/#{relative_dirs[:frontend_templates]}/* #{extension_dir}/#{relative_dirs[:frontend_templates]}/
+				SH
+			end
 		end
 
 		# Replace extension name placeholder with extension name in all files
