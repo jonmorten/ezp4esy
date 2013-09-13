@@ -74,6 +74,13 @@ class Build
 			end
 		end
 
+		# Admin tab
+		if boolean_input['admin_tab']
+			shell.command <<-SH
+				cat #{template_dir}/settings/menu.ini.append.admin_tab.php >> #{extension_dir}/settings/menu.ini.append.php
+			SH
+		end
+
 		# Replace extension name placeholder with extension name in all files
 		shell.command <<-SH
 			pushd #{extension_dir}
