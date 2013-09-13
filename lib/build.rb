@@ -10,6 +10,9 @@ class Build
 
 		extension_dir = [self.get_output_dir_container(), extension_name] * '/'
 		template_dir = [self.get_template_dir_container(), extension_name_placeholder] * '/'
+		relative_dirs = {
+			:classes => 'classes/_Vendor/_Module',
+		}
 
 		shell = Shell.new()
 
@@ -18,12 +21,30 @@ class Build
 			mkdir -p #{extension_dir}
 		SH
 
-		# Autoload
-		if boolean_input['autoload']
+		# PHP classes
+		if boolean_input['php_classes']
 			shell.command <<-SH
+				mkdir -p #{extension_dir}/#{relative_dirs[:classes]}
+				cp #{template_dir}/#{relative_dirs[:classes]}/_Classname.php #{extension_dir}/#{relative_dirs[:classes]}/
+			SH
+		end
+
+		# Template fetch functions
+		if boolean_input['tpl_fetch_fn']
+			shell.command <<-SH
+				mkdir -p #{extension_dir}/#{relative_dirs[:classes]}
+				cp #{template_dir}/#{relative_dirs[:classes]}/_FetchFunctions.php #{extension_dir}/#{relative_dirs[:classes]}/
+			SH
+		end
+
+		# Template operators
+		if boolean_input['tpl_operators']
+			shell.command <<-SH
+				mkdir -p #{extension_dir}/#{relative_dirs[:classes]}
+				cp #{template_dir}/#{relative_dirs[:classes]}/_TemplateOperators.php #{extension_dir}/#{relative_dirs[:classes]}/
 				cp -r #{template_dir}/autoloads #{extension_dir}/
 				mkdir -p #{extension_dir}/settings
-				cat #{template_dir}/settings/site.ini.append.autoload.php >> #{extension_dir}/settings/site.ini.append.php
+				cat #{template_dir}/settings/site.ini.append.tpl_operators.php >> #{extension_dir}/settings/site.ini.append.php
 			SH
 		end
 

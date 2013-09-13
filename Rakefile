@@ -32,11 +32,14 @@ task :build do
 	# 	in which they were created, but arrays will.
 	boolean_input = {}
 	boolean_options = [
-		['autoload', 'PHP autoloading?'],
-		['fetch_fn', 'Template fetch functions?'],
-		['admin_tab', 'Admin tab?'],
-		['cronjobs', 'Cronjobs?'],
+		['php_classes', 'PHP classes?'],
+		['tpl_fetch_fn', 'Template fetch functions?'],
+		['tpl_operators', 'Template operators?'],
 		['frontend_design', 'Frontend design?'],
+		['admin_design', 'Admin design?'],
+		['admin_tab', 'Admin tab?'],
+		['setup_tab_item', 'Setup tab item?'],
+		['cronjobs', 'Cronjobs?'],
 		['sql', 'SQL?'],
 		['translation', 'Translation?'],
 	]
@@ -45,5 +48,5 @@ task :build do
 	end
 
 	#	Copy template and replace placeholders
-	Build::make(extension_name, module_names, boolean_input)
+	Build::make extension_name, module_names, boolean_input
 end
