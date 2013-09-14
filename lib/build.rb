@@ -104,6 +104,15 @@ class Build
 			SH
 		end
 
+		# Cronjobs
+		if boolean_input['cronjobs']
+			shell.command <<-SH
+				cp -r #{template_dir}/cronjobs #{extension_dir}/
+				mkdir -p #{extension_dir}/settings
+				cp #{template_dir}/settings/cronjob.ini.append.php #{extension_dir}/settings/cronjob.ini.append.php
+			SH
+		end
+
 		# Replace extension name placeholder with extension name in all files
 		shell.command <<-SH
 			pushd #{extension_dir}
