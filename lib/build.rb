@@ -5,6 +5,8 @@ class Build
 	end
 
 	def self.make(extension_name, module_names, boolean_input)
+		module_names.sort!
+
 		extension_name_placeholder = self.get_placeholder(:extension)
 		module_name_placeholder = self.get_placeholder(:module)
 
@@ -77,7 +79,28 @@ class Build
 		# Admin tab
 		if boolean_input['admin_tab']
 			shell.command <<-SH
+				mkdir -p #{extension_dir}/settings
 				cat #{template_dir}/settings/menu.ini.append.admin_tab.php >> #{extension_dir}/settings/menu.ini.append.php
+			SH
+		end
+
+		# Setup tab menu item
+		if boolean_input['setup_tab_item']
+			link_names = []
+			links = []
+			policy_list = []
+			module_names.each do |module_name|
+				link_names << "LinkNames[#{module_name}]=_link_name"
+				links << "Links[#{module_name}]=#{module_name}/_view_url"
+				policy_list << "PolicyList_#{module_name}[]=#{module_name}/_policy_function"
+			end
+			shell.command <<-SH
+				if [[ -f #{extension_dir}/settings/menu.ini.append.php ]]; then echo >> #{extension_dir}/settings/menu.ini.append.php; fi
+				mkdir -p #{extension_dir}/settings
+				cat #{template_dir}/settings/menu.ini.append.setup_tab_item.php >> #{extension_dir}/settings/menu.ini.append.php
+				echo #{link_names * "\\\\n"} >> #{extension_dir}/settings/menu.ini.append.php
+				echo #{links * "\\\\n"} >> #{extension_dir}/settings/menu.ini.append.php
+				echo #{policy_list * "\\\\n"} >> #{extension_dir}/settings/menu.ini.append.php
 			SH
 		end
 
