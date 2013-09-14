@@ -152,6 +152,6 @@ class Shell
 	end
 
 	def run
-		Rake::sh @command.gsub!(/\t/, '')
+		Rake::sh @command.gsub(/\t/, '')
 	end
 end
