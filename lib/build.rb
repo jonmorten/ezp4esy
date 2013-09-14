@@ -113,6 +113,13 @@ class Build
 			SH
 		end
 
+		# SQL
+		if boolean_input['sql']
+			shell.command <<-SH
+				cp -r #{template_dir}/sql #{extension_dir}/
+			SH
+		end
+
 		# Replace extension name placeholder with extension name in all files
 		shell.command <<-SH
 			pushd #{extension_dir}
