@@ -120,6 +120,15 @@ class Build
 			SH
 		end
 
+		# Translation
+		if boolean_input['translation']
+			shell.command <<-SH
+				cp -r #{template_dir}/translations #{extension_dir}/
+				if [[ -f #{extension_dir}/settings/site.ini.append.php ]]; then echo >> #{extension_dir}/settings/site.ini.append.php; fi
+				cat #{template_dir}/settings/site.ini.append.translation.php >> #{extension_dir}/settings/site.ini.append.php
+			SH
+		end
+
 		# Replace extension name placeholder with extension name in all files
 		shell.command <<-SH
 			pushd #{extension_dir}
