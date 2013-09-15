@@ -24,8 +24,8 @@ task :build do
 	#	Extension name
 	extension_name = Cli::input_pattern 'Extension name [<extension_name>]', /[a-zA-Z_]+/
 
-	#	Modules
-	module_names = Cli::input_until 'Modules? [<module_name>/n]', /^n$/
+	#	Module
+	module_name = Cli::input_pattern 'Module name [<module_name>]', /[a-zA-Z_]+/
 
 	#	Boolean options
 	#	Use crack hash to keep sort order. Ruby 1.8 hashes won't keep the order
@@ -48,5 +48,5 @@ task :build do
 	end
 
 	#	Copy template and replace placeholders
-	Build::make extension_name, module_names, boolean_input
+	Build::make extension_name, module_name, boolean_input
 end
