@@ -8,14 +8,16 @@ Automate the setting up of extensions while imposing supposed best practices.
 
 ## Todo
 
-* Namespaces
-	* Might have to start at "class\"
-	* Might break _function_definition.php_
+* Testing
+	* Build with all option combinations
+	* Namespaces
+		* See if they work properly, especially in _eztemplateautoload.php_
+		* Might break _function_definition.php_
+	* Template operators: See if the class version works
 * _module.php_
 	* Attempt to move configuration to a class - at least the view URLs
 	* `$FunctionList`
 	* `'params' => array( 'paramKey' => 'paramKey' ),`
-* Template operators: Actually test if the class version works on an eZ clone
 * Silly two character prefix of navigation part
 * _\_view.php_
 	* Attempt to move path configuration to a class
