@@ -6,6 +6,29 @@ _eZ Publish 4.x Extension Skeleton, Yessir_
 
 Automate the setting up of extensions while imposing supposed best practices.
 
+## Requirements
+
+* [Ruby](https://www.ruby-lang.org/en)
+* [RubyGems](http://rubygems.org)
+* [Rake](http://rake.rubyforge.org)
+
+## Usage
+
+Clone the repository and run Rake inside it. `build` is the default task.
+
+    rake
+
+or
+
+    rake build
+
+The build will be placed in a folder named _output_.
+
+## Caveats
+
+* Can only make one module per build
+* Not tested
+
 ## Todo
 
 * Testing
