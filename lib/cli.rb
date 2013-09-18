@@ -26,7 +26,7 @@ end
 class Cli
 	def self.input(message)
 		print (message + "\n> ").color(:darkyellow)
-		return gets.chomp
+		return STDIN.gets.chomp
 	end
 
 	def self.input_boolean(message)
