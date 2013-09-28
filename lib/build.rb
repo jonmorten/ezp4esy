@@ -24,14 +24,12 @@ class Build
 		SH
 
 		# Module settings and structure
-		if boolean_input['setup_tab_item']
-			shell.command <<-SH
-				mkdir -p #{extension_dir}/settings
-				cp #{template_dir}/settings/module.ini.append.php #{extension_dir}/settings/
-				mkdir -p #{extension_dir}/modules/#{module_name}
-				cp -r #{template_dir}/modules/#{module_name_placeholder}/* #{extension_dir}/modules/#{module_name}/
-			SH
-		end
+		shell.command <<-SH
+			mkdir -p #{extension_dir}/settings
+			cp #{template_dir}/settings/module.ini.append.php #{extension_dir}/settings/
+			mkdir -p #{extension_dir}/modules/#{module_name}
+			cp -r #{template_dir}/modules/#{module_name_placeholder}/* #{extension_dir}/modules/#{module_name}/
+		SH
 
 		# PHP classes
 		if boolean_input['php_classes']
