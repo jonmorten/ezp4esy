@@ -9,8 +9,8 @@
 $http = eZHTTPTool::instance();
 $module = $Params['Module'];
 
-$tplView = eZTemplate::factory();
-$tplView->setVariable( 'content', 'Dummy content' );
+$tplContent = eZTemplate::factory();
+$tplContent->setVariable( 'content', 'Dummy content' );
 
 $tplFrame = eZTemplate::factory();
 $tplFrame->setVariable( 'header', 'Dummy header' );
