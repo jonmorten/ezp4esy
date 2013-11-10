@@ -35,6 +35,7 @@ task :build do
 		['php_classes', 'PHP classes?'],
 		['tpl_fetch_fn', 'Template fetch functions?'],
 		['tpl_operators', 'Template operators?'],
+		['cli_script', 'CLI script?'],
 		['frontend_design', 'Frontend design?'],
 		['admin_design', 'Admin design?'],
 		['admin_tab', 'Admin tab?'],

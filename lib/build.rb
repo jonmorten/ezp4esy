@@ -58,6 +58,14 @@ class Build
 			SH
 		end
 
+		# CLI script
+		if boolean_input['cli_script']
+			shell.command <<-SH
+				mkdir -p #{extension_dir}/bin/
+				cp #{template_dir}/bin/_cli_script.php #{extension_dir}/bin/
+			SH
+		end
+
 		# Designs
 		if boolean_input['admin_design'] || boolean_input['frontend_design']
 			shell.command <<-SH
